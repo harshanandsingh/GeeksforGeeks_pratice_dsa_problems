@@ -62,15 +62,15 @@ class Solution {
         int mid = (length+1)/2;
         
         Node* temp = head;
-        Node* pre = nullptr;
+        //Node* pre = nullptr;
         
-        for(int i=0;i<mid;i++){
-            pre = temp;
+        for(int i=0;i<mid-1;i++){
+            //pre = temp;
             temp=temp->next;
         }
         
-        newnode->next = temp;
-        pre->next = newnode;
+        newnode->next = temp->next;
+        temp->next = newnode;
         
         return head;
         

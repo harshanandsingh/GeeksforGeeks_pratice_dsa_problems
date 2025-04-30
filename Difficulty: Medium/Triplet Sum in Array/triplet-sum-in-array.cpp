@@ -12,11 +12,10 @@ class Solution {
         int n = arr.size();
         
         for(int i=0;i<n;i++){
-            int k = target - arr[i];
+            int new_t = target-arr[i];
             unordered_set<int>s;
             for(int j=i+1;j<n;j++){
-                if(s.find(k-arr[j])!=s.end()) return true;
-                
+                if(s.find(new_t-arr[j]) != s.end() ) return true;
                 s.insert(arr[j]);
             }
         }

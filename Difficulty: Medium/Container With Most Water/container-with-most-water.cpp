@@ -13,19 +13,21 @@ class Solution {
         // code here
         int n = arr.size();
         
-        if(n==1) return 0;
-        
         int i=0,j=n-1;
-        
-        int max_h = INT_MIN;
-        
+        int max_ =0;
         while(i<j){
-            max_h = max(max_h , (j-i)*min(arr[i],arr[j]));
-            //cout<<max_h<<" "<<i<<" "<<j<<endl;
-            if(arr[i]<=arr[j]) i++;
-            else j--;
+            int max_val ;
+            if(arr[i]<=arr[j]){
+                max_val = arr[i];
+                i++;
+            }
+            else{
+                max_val = arr[j];
+                j--;
+            }
+            max_ = max(max_,max_val*(j-i+1));
         }
-        return max_h;
+        return max_;
     }
 };
 

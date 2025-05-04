@@ -12,29 +12,27 @@ class Solution {
     vector<int> productExceptSelf(vector<int>& arr) {
         // code here
         int n = arr.size();
-        int flag = 0;
-        
-        long long int pro=1;
-        for(int x:arr){
-            if(x !=0) pro*=x;
-            
-            if(x == 0) flag++;
+        long long int pro = 1;
+        int c_0 = 0;
+        for(int i=0;i<n;i++){
+            if(arr[i] != 0) pro*=arr[i];
+            else c_0++;
         }
-        
-        //cout<<pro<<" "<<flag<<endl;
-        
-        for(int &x:arr){
-            if(flag >=2) x=0;
-            else if(flag == 1){
-                if(x==0) x=pro;
-                else x=0;
-            }
-            else{
-                x=pro/x;
+        vector<int>res(n,0);
+        if(c_0 >=2) return res;
+        else if(c_0 == 1){
+            for(int i=0;i<n;i++){
+                if(arr[i]==0){
+                    res[i]=pro; 
+                    return res;
+                }
             }
         }
         
-        return arr;
+        for(int i=0;i<n;i++){
+            res[i]=pro/arr[i];
+        }
+        return res;
     }
 };
 

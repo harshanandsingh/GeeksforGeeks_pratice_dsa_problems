@@ -12,13 +12,22 @@ using namespace std;
 class Solution {
   public:
     int majorityElement(vector<int>& arr) {
-        // code here
-        unordered_map<int,int>m;
-        for(int x:arr) m[x]++;
-        for(auto x:m){
-            if(x.second > arr.size()/2) return x.first;
+        
+        // no candidate , and count = 0
+        int candidate = -1,count = 0;
+        for(int x: arr){
+            if(count==0){
+                candidate = x;
+                count++;
+            }
+            else if(candidate == x) count++;
+            else if(candidate != x) count--;
         }
-        return -1;
+        int fre_can = 0;
+        for(int x : arr) if(x == candidate ) fre_can++;
+        
+        if(fre_can > arr.size()/2) return candidate;
+        else return -1;
     }
 };
 

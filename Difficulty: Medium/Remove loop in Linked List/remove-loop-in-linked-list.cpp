@@ -87,24 +87,37 @@ class Solution {
     // Function to remove a loop in the linked list.
     void removeLoop(Node* head) {
         // code here
-        unordered_map<Node* , int>m;
+        bool loop = false;
+        if(head == nullptr) return ;
         
-        if(head == nullptr) return;
-        
-        Node* temp = head;
-        Node* prev= nullptr;
-        while(temp != nullptr){
-            if( m.find(temp) != m.end() ){
-                prev->next = nullptr;
-                return;
-            } 
-            else{
-                m[temp]++;
+        Node* fast = head, *slow = head;
+        while(fast->next && fast->next->next){
+            slow= slow->next;
+            fast = fast->next->next;
+            if(slow == fast){
+                loop = true;
+                break;
             }
-            
-            prev = temp;
-            temp = temp->next;
         }
+        
+        if(loop){
+            slow = head;
+            // Special case: when loop starts at head
+            if (slow == fast) {
+                while (fast->next != slow) {
+                    fast = fast->next;
+                }
+            } else {
+                while (slow->next != fast->next) {
+                    slow = slow->next;
+                    fast = fast->next;
+                }
+            }
+    
+            // Step 3: Remove loop
+            fast->next = nullptr;
+        }
+        
     }
 };
 

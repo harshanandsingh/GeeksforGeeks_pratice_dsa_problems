@@ -36,26 +36,21 @@ void printList(Node* node) {
 // Function to find the data of kth node from the end of a linked list.
 class Solution {
   public:
-    int length_of_linklist(Node* head){
-        if(head == nullptr) return 0;
-        
-        int count=0;
-        while(head != nullptr){
-            count++;
-            head = head -> next;
-        }
-        return count;
-    }
     int getKthFromLast(Node *head, int k) {
-        
-        int n = length_of_linklist(head);
-        if(n==0 || n<k ) return -1;
-        n=n-k;
-        Node* temp = head;
-        for(int i=0;i<n;i++){
-            temp = temp->next;
+        // Your code here
+        Node *first = head , *second = head;
+        while(k){
+            if(first == nullptr) return -1;
+            first = first->next;
+            k--;
         }
-        return temp->data;
+        
+        while(first){
+            first= first->next;
+            second = second->next;
+        }
+        return second->data;
+        // return -1;
     }
 };
 

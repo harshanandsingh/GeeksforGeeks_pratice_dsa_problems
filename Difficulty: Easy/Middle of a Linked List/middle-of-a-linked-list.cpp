@@ -42,32 +42,17 @@ struct Node {
 class Solution {
   public:
     /* Should return data of middle node. If linked list is empty, then -1 */
-    int length_of_linklist(Node* head){
-        if(head == nullptr) return 0;
-        
-        int count=0;
-        while(head != nullptr){
-            count++;
-            head = head -> next;
-        }
-        return count;
-    }
     int getMiddle(Node* head) {
         // code here
-        int n = length_of_linklist(head);
+        Node* fast = head;
+        Node* slow = head;
         
-        if(n == 0 ) return -1;
-        
-        int mid;
-        
-        if(n&1) mid=(n+1)/2;
-        else mid = n/2 + 1;
-        
-        Node* temp = head;
-        for(int i=0;i<mid-1;i++){
-            temp = temp->next;
+        while(fast->next && fast->next->next){
+            slow = slow->next;
+            fast = fast->next->next;
         }
-        return temp->data;
+        if(fast->next) slow= slow->next;
+        return slow->data;
     }
 };
 

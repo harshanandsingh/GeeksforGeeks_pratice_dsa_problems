@@ -35,23 +35,12 @@ class Solution {
   public:
     bool isCircular(Node *head) {
         // Your code here
-        // if(head == nullptr) return false;
-        
-        // Node* temp = head->next;
-        // while(temp != nullptr){
-        //     if(temp == head) return true;
-        //     //cout<<temp<<" "<<head<<endl;
-        //     temp = temp->next;
-        // }
-        // return false;
-        
-        if (head == nullptr) return false;
-
+        if(head == nullptr) return false;
         Node* temp = head->next;
-        while (temp != nullptr && temp != head) {
+        while(temp!= nullptr && temp != head){
             temp = temp->next;
         }
-        return temp == head;
+        return temp==head;
     }
 };
 

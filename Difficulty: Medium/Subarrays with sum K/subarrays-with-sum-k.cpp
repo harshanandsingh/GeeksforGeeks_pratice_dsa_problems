@@ -12,19 +12,17 @@ class Solution {
   public:
     int countSubarrays(vector<int> &arr, int k) {
         // code here
-        unordered_map<int, int> prefixCount;
-        int sum = 0, count = 0;
-    
-        prefixCount[0] = 1; // base case
-    
-        for(int i = 0; i < arr.size(); i++) {
-            sum += arr[i];
-    
-            if(prefixCount.find(sum - k) != prefixCount.end()) {
-                count += prefixCount[sum - k];
+        int n = arr.size();
+        unordered_map<int,int>m;
+        m[0]=1;
+        int count=0;
+        int pre_sum = 0;
+        for(int i=0;i<n;i++){
+            pre_sum +=arr[i];
+            if(m.find(pre_sum - k) != m.end() ){
+                count+=m[pre_sum-k];
             }
-    
-            prefixCount[sum]++;
+            m[pre_sum]++;
         }
         return count;
     }

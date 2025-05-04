@@ -53,18 +53,18 @@ class Solution {
     Node* removeDuplicates(Node* head) {
 
         // code here
-        if(!head) return head;
-        Node* i = head;
-        Node* j= head;
-
-        while(j != nullptr){
-            if(j->data != i-> data){
-                i-> next = j;
-                i=j;
+        if(head == nullptr) return head;
+        
+        Node* temp1 = head , *temp2 = head;
+        while(temp2){
+            if(temp1->data != temp2->data){
+                temp1->next=temp2;
+                temp1 = temp1->next; // in sort temp2
             }
-            else j = j->next;
+            temp2= temp2->next;
         }
-        i->next = j;
+        //temp1->next = temp2;
+        temp1->next = nullptr;
         return head;
     }
 };

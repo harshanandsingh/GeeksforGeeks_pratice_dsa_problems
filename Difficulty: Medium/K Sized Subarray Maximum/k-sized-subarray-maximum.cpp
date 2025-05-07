@@ -8,40 +8,13 @@ using namespace std;
 class Solution {
   public:
     vector<int> maxOfSubarrays(vector<int>& arr, int k) {
-        // code here
-        // int n = arr.size();
-        
-        // int i=0,j=0;
-        
-        // vector<int>v;
-        
-        // vector<int>max_val;
-
-        // while(j<n){
-            
-        //     int t = max_val.size()-1;
-            
-        //     while(!max_val.empty() && max_val[t]<arr[j]){
-        //         max_val.pop_back();
-        //         t--;
-        //     }
-        //     max_val.push_back(arr[j]);
-            
-        //     if(j-i+1 < k ) j++;
-        //     else{
-        //         v.push_back(max_val[0]);
-        //         if(arr[i]==max_val[0] ) max_val.pop_front();
-        //         i++;
-        //     }
-        // }
-        // return v;
         
         int n = arr.size();
         int i = 0, j = 0;
     
         vector<int> v;           // stores final result
-        vector<int> max_val;     // stores potential max elements in decreasing order
-    
+        //vector<int> max_val;     // stores potential max elements in decreasing order
+        deque<int>max_val;
         while (j < n) {
             // Maintain decreasing order in max_val
             while (!max_val.empty() && max_val.back() < arr[j]) {
@@ -50,21 +23,20 @@ class Solution {
             max_val.push_back(arr[j]);
     
             // If window size < k, just move j
-            if (j - i + 1 < k) {
-                j++;
-            }
-            else if (j - i + 1 == k) {
+            
+            if (j - i + 1 == k) {
                 // Front of max_val is the max in the window
                 v.push_back(max_val[0]);
     
                 // If the element going out is the current max, remove it
                 if (arr[i] == max_val[0]) {
-                    max_val.erase(max_val.begin());
+                    max_val.pop_front();
                 }
     
                 i++;
-                j++;
+                
             }
+            j++;
         }
     
         return v;

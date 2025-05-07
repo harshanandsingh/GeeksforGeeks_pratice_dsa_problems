@@ -9,26 +9,21 @@ class Solution {
   public:
     int maxLen(vector<int> &arr) {
         // Your code here
-        int n = arr.size();
+        int n = arr.size(),pre_sum=0;
         unordered_map<int,int>m;
-        
-        int maxLen=0;
-        m[0] = 1;
-        
-        int sum=0;
+        m[0]=-1;
+        int max_=0;
         for(int i=0;i<n;i++){
             if(arr[i]==0) arr[i]=-1;
+            pre_sum +=arr[i];
             
-            sum+=arr[i];
-            
-            if(sum == 0) maxLen = i + 1;
-            if(m.find(sum) != m.end()) {
-                maxLen = max(maxLen, i - m[sum]);
-            } else {
-                m[sum] = i; // Store first occurrence
+            if(m.find(pre_sum)!=m.end()){
+                max_=max(max_,i-m[pre_sum]);
             }
+            
+            if(m.find(pre_sum)==m.end()) m[pre_sum]=i;
         }
-        return maxLen;
+        return max_;
     }
 };
 

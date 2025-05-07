@@ -11,25 +11,19 @@ class Solution {
   public:
     int smallestSubstring(string s) {
         // Code here
-        int n = s.size();
-        
-        int i=0,j=0,ans=INT_MAX;
-        
-        unordered_map<char, int> freq;
-        
+        unordered_map<char,int>m;
+        int i=0,j=0,n=s.size();
+        int min_ = INT_MAX;
         while(j<n){
-            freq[s[j]]++;
-            
-            while (freq['0'] > 0 && freq['1'] > 0 && freq['2'] > 0){
-                ans = min(ans,j-i+1);
-                
-                freq[s[i]]--;
+            m[s[j]]++;
+            while(m['0']>0 && m['1']>0 && m['2']>0){
+                min_ = min(min_,j-i+1);
+                m[s[i]]--;
                 i++;
             }
-            
             j++;
         }
-        return (ans == INT_MAX) ? -1 : ans;
+        return min_ == INT_MAX ? -1:min_;
     }
 };
 

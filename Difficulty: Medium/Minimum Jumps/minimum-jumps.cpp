@@ -21,11 +21,13 @@ class Solution {
             
             int l_jump = 0;
             
-            for(int i=l;i<=r;i++){
-                l_jump = max(l_jump,arr[i]+i);
-            }
+            // for(int i=l;i<=r;i++){
+            //     l_jump = max(l_jump,arr[i]+i);
+            // }
+            while(l<=r) l_jump=max(l_jump,arr[l]+(l++));
+            
             if (l_jump <= r) return -1; // stuck, can't go further
-            l=r+1;
+            // l=r+1;
             r=l_jump;
             jump++;
         }

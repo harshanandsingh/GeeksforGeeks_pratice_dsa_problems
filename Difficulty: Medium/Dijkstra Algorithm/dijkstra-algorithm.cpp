@@ -14,7 +14,9 @@ class Solution {
         }
         
         // crate a priority queue -> distance , node min 
-        priority_queue< pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>> > pq;
+        // we can use priority queue as well set data structure as well 
+        // priority_queue< pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>> > pq;
+        set<pair<int,int>>pq;
         
         // crate a distance array and assingn to infinity 
         vector<int>dis(n,INT_MAX);
@@ -23,12 +25,21 @@ class Solution {
         dis[src]=0;
         
         // push in priority queue 
-        pq.push({0,src});
+        // pq.push({0,src});
+        pq.insert({0,src});
         
         while(!pq.empty()){
-            int node = pq.top().second;
-            int wt = pq.top().first;
-            pq.pop();
+            // int node = pq.top().second;
+            // int wt = pq.top().first;
+            // pq.pop();
+            
+            
+            // Step 5: Get node with smallest distance
+            auto it = *(pq.begin());
+            pq.erase(pq.begin());
+    
+            int wt = it.first;
+            int node = it.second;
             
             // now find all the node which are adjesent to  node 
             for(auto x:adj[node]){
@@ -37,7 +48,8 @@ class Solution {
                 
                 if(wt+b < dis[a]){
                     dis[a]=wt+b;
-                    pq.push({wt+b,a});
+                    // pq.push({wt+b,a});
+                    pq.insert({wt+b,a});
                 }
                 
             }

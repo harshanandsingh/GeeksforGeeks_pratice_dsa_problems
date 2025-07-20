@@ -27,6 +27,7 @@ class Solution {
                 if(m.find(l-1)!=m.end()) v.push_back((m[r]-m[l-1])/(r-l+1));
                 else v.push_back((m[r]/(r-l+1)));
             }
+            else return v;
         }
         return v;
     }

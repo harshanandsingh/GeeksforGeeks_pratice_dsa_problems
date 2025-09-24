@@ -1,60 +1,31 @@
-//{ Driver Code Starts
-// Initial template for C++
-
-#include <bits/stdc++.h>
-using namespace std;
-
-
-// } Driver Code Ends
-
-// User function template for C++
-
 class Solution {
   public:
-    int majorityElement(vector<int>& arr) {
+    int majorityElement(vector<int>& nums) {
         
-        // no candidate , and count = 0
-        int candidate = -1,count = 0;
-        for(int x: arr){
-            if(count==0){
-                candidate = x;
-                count++;
+        int m_e = nums[0];
+        int count = 0;
+        int n = nums.size();
+
+        int i=0;
+        while(i<n){
+            if(nums[i] == m_e) count++;
+            else{
+                count--;
+                if(count == 0){
+                    m_e = nums[i];
+                    count++;
+                }
             }
-            else if(candidate == x) count++;
-            else if(candidate != x) count--;
+            i++;
         }
-        int fre_can = 0;
-        for(int x : arr) if(x == candidate ) fre_can++;
         
-        if(fre_can > arr.size()/2) return candidate;
-        else return -1;
+        // now i got the candidate to find the majority element
+        count = 0;
+        for(auto x:nums){
+            if(x==m_e) count++;
+        }
+        if(count > nums.size()/2) return m_e;
+        return -1;
+        
     }
 };
-
-
-//{ Driver Code Starts.
-
-int main() {
-
-    int t;
-    cin >> t;
-    cin.ignore();
-    while (t--) {
-        int n;
-        vector<int> a, b;
-        string input;
-        getline(cin, input);
-        stringstream ss(input);
-        int num;
-        while (ss >> num)
-            a.push_back(num);
-
-        Solution obj;
-        cout << obj.majorityElement(a) << endl;
-        cout << "~" << endl;
-    }
-
-    return 0;
-}
-
-// } Driver Code Ends

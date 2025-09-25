@@ -13,28 +13,27 @@ class Solution {
         
         int i=0,j=0;
         
-        vector<int>neg_no;
+        //vector<int>neg_no;
+        queue<int>neg_no;
         vector<int>ans;
         
         while(j<n){
-            if(arr[j]<0) neg_no.push_back(arr[j]);
+            if(arr[j]<0) neg_no.push(arr[j]);
             
-            if(j-i+1 < k) j++;
-            
-            else if(j-i+1 == k){
+            if(j-i+1 == k){
                 
                 if(!neg_no.empty()){
-                    ans.push_back(neg_no[0]);
+                    ans.push_back(neg_no.front());
                     
-                    if(arr[i]==neg_no[0]){
-                        neg_no.erase(neg_no.begin());
+                    if(arr[i]==neg_no.front()){
+                        neg_no.pop();
                         
                     }
                 }
                 else ans.push_back(0);
                 i++;
-                j++;
             }
+            j++;
         }
         return ans;
     }
